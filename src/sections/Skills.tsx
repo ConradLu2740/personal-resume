@@ -3,59 +3,58 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { 
-  Code2, 
+  Brain, 
   Server, 
-  Wrench, 
-  Languages,
-  Star
+  Code2, 
+  Wrench,
 } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
 
 // 技能数据配置
 const skillsData = {
-  frontend: {
-    icon: Code2,
-    label: 'frontend',
+  ai: {
+    icon: Brain,
+    label: 'ai',
     skills: [
-      { name: 'React / Next.js', level: 90 },
-      { name: 'TypeScript', level: 85 },
-      { name: 'Tailwind CSS', level: 90 },
-      { name: 'Vue.js', level: 75 },
-      { name: 'HTML / CSS', level: 95 },
+      { name: 'LLM 应用开发 (Prompt Engineering)', level: 85 },
+      { name: 'LangChain / LlamaIndex', level: 80 },
+      { name: 'Agent 框架 (AutoGen / CrewAI)', level: 75 },
+      { name: 'RAG 检索增强生成', level: 80 },
+      { name: 'OpenAI / Claude API', level: 85 },
     ],
   },
   backend: {
     icon: Server,
     label: 'backend',
     skills: [
-      { name: 'Node.js / Express', level: 85 },
-      { name: 'Python / Django', level: 80 },
-      { name: 'Go / Gin', level: 75 },
-      { name: 'PostgreSQL / MongoDB', level: 80 },
-      { name: 'Redis', level: 70 },
+      { name: 'Python / FastAPI', level: 85 },
+      { name: 'Node.js / Express', level: 75 },
+      { name: 'PostgreSQL / MongoDB', level: 70 },
+      { name: 'Redis / 消息队列', level: 65 },
+      { name: 'RESTful API 设计', level: 80 },
+    ],
+  },
+  frontend: {
+    icon: Code2,
+    label: 'frontend',
+    skills: [
+      { name: 'React / Next.js', level: 75 },
+      { name: 'TypeScript', level: 70 },
+      { name: 'Tailwind CSS', level: 80 },
+      { name: 'HTML / CSS', level: 85 },
+      { name: 'Vue.js', level: 65 },
     ],
   },
   tools: {
     icon: Wrench,
     label: 'tools',
     skills: [
-      { name: 'Git / GitHub', level: 90 },
-      { name: 'Docker', level: 80 },
-      { name: 'AWS / Vercel', level: 75 },
-      { name: 'Linux', level: 85 },
-      { name: 'CI/CD', level: 70 },
-    ],
-  },
-  languages: {
-    icon: Languages,
-    label: 'languages',
-    skills: [
-      { name: 'JavaScript / TypeScript', level: 95 },
-      { name: 'Python', level: 85 },
-      { name: 'Go', level: 75 },
-      { name: 'Java', level: 70 },
-      { name: 'SQL', level: 80 },
+      { name: 'Git / GitHub', level: 85 },
+      { name: 'Docker', level: 70 },
+      { name: 'Linux', level: 75 },
+      { name: '向量数据库 (Milvus / Pinecone)', level: 70 },
+      { name: 'CI/CD', level: 60 },
     ],
   },
 }
@@ -92,7 +91,7 @@ function SkillCard({
   category, 
   index 
 }: { 
-  category: typeof skillsData.frontend; 
+  category: typeof skillsData.ai; 
   index: number 
 }) {
   const { t } = useLanguage()

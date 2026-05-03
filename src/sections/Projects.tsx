@@ -10,55 +10,57 @@ import SectionTitle from '@/components/SectionTitle'
 const projectsData = [
   {
     id: 1,
-    title: '电商平台',
-    titleEn: 'E-commerce Platform',
-    description: '一个功能完善的电商平台，支持商品管理、购物车、订单系统和支付集成。',
-    descriptionEn: 'A full-featured e-commerce platform with product management, shopping cart, order system, and payment integration.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    image: '/images/project1.jpg',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-    features: ['用户认证与授权', '商品搜索与筛选', '购物车与结算', '订单管理与追踪'],
-    featuresEn: ['User Authentication', 'Product Search & Filter', 'Shopping Cart & Checkout', 'Order Management'],
+    title: '视频名场面智能检测系统',
+    titleEn: 'Video Highlight Intelligent Detection System',
+    description: '基于多模态大模型的视频名场面智能检测系统，自动完成场景切割、关键帧提取、VLM 智能评分、语音转写，输出名场面判定结果与视频片段导出。',
+    descriptionEn: 'A multi-modal LLM-based video highlight intelligent detection system that automatically performs scene segmentation, keyframe extraction, VLM scoring, and speech transcription to output highlight detection results and video clips.',
+    tags: ['Python', 'FastAPI', 'Qwen-VL', 'Celery', 'Docker'],
+    emoji: '🎬',
+    github: 'https://github.com/ConradLu2740/video-analyzer',
+    demo: '#',
+    features: [
+      '基于 PySceneDetect 的场景自动切割',
+      'FFmpeg 关键帧提取 + Qwen-VL 视觉语言模型评分',
+      'Faster-Whisper 语音转录与后处理',
+      'Celery 异步任务队列 + Redis 消息代理',
+      '多租户认证、配额管理、熔断限流',
+      'Docker Compose 微服务编排 + Prometheus 监控',
+    ],
+    featuresEn: [
+      'Automatic scene segmentation with PySceneDetect',
+      'FFmpeg keyframe extraction + Qwen-VL scoring',
+      'Faster-Whisper speech transcription & post-processing',
+      'Celery async task queue + Redis message broker',
+      'Multi-tenant auth, quota management, circuit breaker & rate limiting',
+      'Docker Compose microservice orchestration + Prometheus monitoring',
+    ],
   },
   {
     id: 2,
-    title: '任务管理系统',
-    titleEn: 'Task Management System',
-    description: '团队协作任务管理工具，支持看板视图、甘特图和实时通知。',
-    descriptionEn: 'Team collaboration task management tool with kanban view, Gantt chart, and real-time notifications.',
-    tags: ['Vue.js', 'Express', 'PostgreSQL', 'Socket.io'],
-    image: '/images/project2.jpg',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-    features: ['看板与列表视图', '任务分配与追踪', '实时协作', '数据可视化'],
-    featuresEn: ['Kanban & List View', 'Task Assignment', 'Real-time Collaboration', 'Data Visualization'],
-  },
-  {
-    id: 3,
-    title: '个人博客系统',
-    titleEn: 'Personal Blog System',
-    description: '支持 Markdown 的博客系统，包含文章管理、评论系统和 SEO 优化。',
-    descriptionEn: 'Markdown-supported blog system with article management, comment system, and SEO optimization.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma'],
-    image: '/images/project3.jpg',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-    features: ['Markdown 编辑器', '代码高亮', '评论系统', 'SEO 优化'],
-    featuresEn: ['Markdown Editor', 'Code Highlighting', 'Comment System', 'SEO Optimization'],
-  },
-  {
-    id: 4,
-    title: '数据分析仪表盘',
-    titleEn: 'Data Analytics Dashboard',
-    description: '实时数据可视化仪表盘，支持多种图表类型和数据导出功能。',
-    descriptionEn: 'Real-time data visualization dashboard with multiple chart types and data export features.',
-    tags: ['React', 'D3.js', 'Python', 'FastAPI'],
-    image: '/images/project4.jpg',
-    github: 'https://github.com',
-    demo: 'https://demo.com',
-    features: ['实时数据更新', '交互式图表', '自定义报表', '数据导出'],
-    featuresEn: ['Real-time Updates', 'Interactive Charts', 'Custom Reports', 'Data Export'],
+    title: '个人作品集网站',
+    titleEn: 'Personal Portfolio Website',
+    description: '基于 Next.js 14 构建的个人作品集网站，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages。',
+    descriptionEn: 'A personal portfolio website built with Next.js 14, featuring dark/light theme toggle, Chinese/English bilingual support, Framer Motion animations, deployed on Cloudflare Pages.',
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    emoji: '🌐',
+    github: 'https://github.com/ConradLu2740/personal-resume',
+    demo: 'https://luxiyuan-portfolio.pages.dev',
+    features: [
+      'Next.js 14 App Router + TypeScript',
+      '暗黑/亮色主题切换 (next-themes)',
+      '中英文双语国际化 (i18n)',
+      'Framer Motion 滚动动画与交互',
+      '响应式设计，适配移动端',
+      'Cloudflare Pages 全球 CDN 部署',
+    ],
+    featuresEn: [
+      'Next.js 14 App Router + TypeScript',
+      'Dark/Light theme toggle (next-themes)',
+      'Chinese/English bilingual i18n',
+      'Framer Motion scroll animations & interactions',
+      'Responsive design for mobile devices',
+      'Cloudflare Pages global CDN deployment',
+    ],
   },
 ]
 
@@ -81,7 +83,7 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
         {/* Project Image */}
         <div className="relative h-48 bg-secondary overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-6xl">📦</div>
+            <div className="text-6xl">{project.emoji}</div>
           </div>
           
           {/* Overlay on hover */}
@@ -102,14 +104,16 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
               </a>
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
-              >
-                <ExternalLink className="w-6 h-6 text-white" />
-              </a>
+              {project.demo !== '#' && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
+                >
+                  <ExternalLink className="w-6 h-6 text-white" />
+                </a>
+              )}
             </div>
           </motion.div>
         </div>
@@ -156,7 +160,7 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="relative max-w-2xl w-full bg-background rounded-2xl p-8 border border-border"
+        className="relative max-w-2xl w-full bg-background rounded-2xl p-8 border border-border max-h-[80vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -174,11 +178,13 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
           {language === 'zh' ? project.description : project.descriptionEn}
         </p>
 
-        <h3 className="font-semibold mb-3">核心功能</h3>
+        <h3 className="font-semibold mb-3">
+          {language === 'zh' ? '核心功能' : 'Core Features'}
+        </h3>
         <ul className="space-y-2 mb-6">
           {(language === 'zh' ? project.features : project.featuresEn).map((feature, index) => (
-            <li key={index} className="flex items-center gap-2">
-              <ChevronRight className="w-4 h-4 text-primary-400" />
+            <li key={index} className="flex items-start gap-2">
+              <ChevronRight className="w-4 h-4 text-primary-400 mt-0.5 flex-shrink-0" />
               {feature}
             </li>
           ))}
@@ -194,17 +200,19 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
             </svg>
-            源代码
+            {language === 'zh' ? '源代码' : 'Source Code'}
           </a>
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
-          >
-            <ExternalLink className="w-4 h-4" />
-            在线演示
-          </a>
+          {project.demo !== '#' && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4" />
+              {language === 'zh' ? '在线演示' : 'Live Demo'}
+            </a>
+          )}
         </div>
       </motion.div>
     </motion.div>

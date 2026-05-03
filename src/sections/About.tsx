@@ -84,9 +84,9 @@ export default function About() {
             {/* Quick Stats */}
             <div className="grid grid-cols-3 gap-4 mt-8">
               {[
-                { label: '年经验', value: '3+' },
-                { label: '项目', value: '20+' },
-                { label: '技术栈', value: '10+' },
+                { label: '实习经历', value: '1' },
+                { label: '项目', value: '5+' },
+                { label: '技术栈', value: '8+' },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
