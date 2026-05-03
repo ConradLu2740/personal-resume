@@ -10,6 +10,33 @@ import SectionTitle from '@/components/SectionTitle'
 const projectsData = [
   {
     id: 1,
+    title: '智能网络运维助手',
+    titleEn: 'NetworkOps AI — Intelligent Network O&M Assistant',
+    description: '面向通信行业运维场景的智能助手系统，融合 RAG 检索增强生成、Agent 工具调用、实时日志分析，实现从故障发现、智能诊断到自动化修复的全链路运维闭环。Python + Go + React 三层架构，17,653 行代码。',
+    descriptionEn: 'An intelligent assistant system for telecom network O&M, integrating RAG retrieval-augmented generation, Agent tool invocation, and real-time log analysis to achieve full-loop O&M from fault detection to automated remediation. Python + Go + React architecture, 17,653 lines of code.',
+    tags: ['Python', 'FastAPI', 'React', 'RAG', 'Agent', 'Go'],
+    emoji: '🤖',
+    github: 'https://github.com/ConradLu2740/networkops-ai',
+    demo: '#',
+    features: [
+      'RAG 三阶段检索：BM25+向量双路召回 → RRF 融合 → Cross-Encoder 精排，971 向量覆盖 13 个知识领域',
+      'Agent 工具框架：10 个工具（日志查询/拓扑发现/SNMP/Ping/Ansible 等），Function Calling 自动编排',
+      'Go 日志采集器 + Syslog UDP 接收 + WebSocket 实时推送，RFC3164/5424 协议解析',
+      'LLDP/CDP 拓扑自动发现 + 可视化，ITSM 工单系统 + Ansible Playbook 自动化执行',
+      'JWT 认证 + 前端路由守卫，238 个测试用例全部通过',
+      '通信领域知识库：5G 核心网/传输网/接入网/光通信/卫星微波等 2,631 行专业文档',
+    ],
+    featuresEn: [
+      '3-stage RAG retrieval: BM25+vector dual recall → RRF fusion → Cross-Encoder re-ranking, 971 vectors across 13 knowledge domains',
+      'Agent tool framework: 10 tools (log query/topology discovery/SNMP/Ping/Ansible etc.), Function Calling auto-orchestration',
+      'Go log collector + Syslog UDP receiver + WebSocket real-time push, RFC3164/5424 protocol parsing',
+      'LLDP/CDP auto topology discovery + visualization, ITSM ticketing + Ansible Playbook automation',
+      'JWT auth + frontend route guard, 238 test cases all passing',
+      'Telecom knowledge base: 5G core/transport/access/optical/satellite etc., 2,631 lines of professional docs',
+    ],
+  },
+  {
+    id: 2,
     title: '视频名场面智能检测系统',
     titleEn: 'Video Highlight Intelligent Detection System',
     description: '基于多模态大模型的视频名场面智能检测系统，自动完成场景切割、关键帧提取、VLM 智能评分、语音转写，输出名场面判定结果与视频片段导出。',
@@ -36,7 +63,7 @@ const projectsData = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     title: '个人作品集网站',
     titleEn: 'Personal Portfolio Website',
     description: '基于 Next.js 14 构建的个人作品集网站，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages。',
@@ -232,7 +259,7 @@ export default function Projects() {
           subtitle=""
         />
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((project, index) => (
             <div key={project.id} onClick={() => setSelectedProject(project)}>
               <ProjectCard project={project} index={index} />
