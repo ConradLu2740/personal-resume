@@ -77,7 +77,7 @@ function ExperienceCard({
         </p>
 
         {/* Achievements */}
-        <ul className="space-y-2">
+        <ul className="space-y-2 mb-4">
           {(language === 'zh' ? experience.achievements : experience.achievementsEn).map((achievement, i) => (
             <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
               <span className="text-primary-400 mt-1">•</span>
@@ -85,6 +85,15 @@ function ExperienceCard({
             </li>
           ))}
         </ul>
+
+        {/* Internship Summary */}
+        <div className="pt-4 border-t border-border">
+          <p className="text-sm text-primary-400/80 italic">
+            {language === 'zh'
+              ? '通过本次实习，深入理解了生产级 AI 应用的工程实践，从模块设计到部署运维的全链路经验。'
+              : 'Through this internship, gained deep understanding of production-grade AI application engineering practices, from module design to deployment and operations.'}
+          </p>
+        </div>
       </div>
     </div>
   )

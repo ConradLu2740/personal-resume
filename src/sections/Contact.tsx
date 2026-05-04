@@ -33,35 +33,14 @@ function ContactForm() {
     email: '',
     message: '',
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
-
-    try {
-      const res = await fetch('https://formspree.io/f/xwpkkqjp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-        }),
-      })
-      if (res.ok) {
-        setSubmitStatus('success')
-        setFormData({ name: '', email: '', message: '' })
-      } else {
-        setSubmitStatus('error')
-      }
-    } catch {
-      setSubmitStatus('error')
-    } finally {
-      setIsSubmitting(false)
-    }
+    const subject = encodeURIComponent(`来自 ${formData.name} 的消息`)
+    const body = encodeURIComponent(
+      `发件人: ${formData.name}\n邮箱: ${formData.email}\n\n${formData.message}`
+    )
+    window.open(`mailto:luxiyuan2020@163.com?subject=${subject}&body=${body}`, '_blank')
   }
 
   return (
@@ -110,29 +89,15 @@ function ContactForm() {
 
       <button
         type="submit"
-        disabled={isSubmitting}
-        className="w-full px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
       >
-        {isSubmitting ? (
-          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-        ) : (
-          <>
-            <Send className="w-4 h-4" />
-            {t('contact.submit') as string}
-          </>
-        )}
+        <Send className="w-4 h-4" />
+        {t('contact.submit') as string}
       </button>
 
-      {submitStatus === 'success' && (
-        <p className="text-green-500 text-sm text-center">
-          {t('contact.success') as string}
-        </p>
-      )}
-      {submitStatus === 'error' && (
-        <p className="text-red-500 text-sm text-center">
-          {t('contact.error') as string}
-        </p>
-      )}
+      <p className="text-xs text-muted-foreground text-center">
+        点击后将打开您的邮箱客户端发送邮件
+      </p>
     </form>
   )
 }

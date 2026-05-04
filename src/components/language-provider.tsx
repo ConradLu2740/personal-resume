@@ -23,13 +23,13 @@ const zhTranslations = {
   hero: {
     greeting: '你好，我是',
     title: 'Agent 应用开发实习生',
-    subtitle: '用 AI 解决真实问题',
+    subtitle: '专注于 LLM 应用开发与 Agent 系统构建',
     viewProjects: '查看项目',
     contactMe: '联系我',
   },
   about: {
     title: '关于我',
-    description: '东北大学电子信息工程本科，专注于 LLM 应用开发与 Agent 系统构建。善于将大模型能力与工程实践结合，落地可用的智能应用。持续学习，追求简洁高效的工程方案。',
+    description: '东北大学电子信息工程本科，专注于 LLM 应用开发与 Agent 系统构建。在实习期间主导开发视频名场面检测系统的 VLM 评分模块，将人工筛选效率提升 3 倍；独立构建 NetworkOps AI 运维助手，涵盖 RAG 检索、Agent 工具框架与微服务架构。善于将大模型能力与工程实践结合，持续追求简洁高效的工程方案。',
     education: '教育背景',
     university: '东北大学',
     major: '电子信息工程',
@@ -55,7 +55,7 @@ const zhTranslations = {
   },
   contact: {
     title: '联系方式',
-    description: '欢迎联系我，交流合作或技术讨论均可。',
+    description: '正在寻找 Agent 应用开发实习机会，期待与您交流！',
     email: '邮箱',
     phone: '电话',
     location: '地点',
@@ -87,13 +87,13 @@ const enTranslations = {
   hero: {
     greeting: "Hi, I'm",
     title: 'Agent Application Development Intern',
-    subtitle: 'Solving real problems with AI',
+    subtitle: 'Focused on LLM application development and Agent system building',
     viewProjects: 'View Projects',
     contactMe: 'Contact Me',
   },
   about: {
     title: 'About Me',
-    description: 'B.S. in Electronic Information Engineering from Northeastern University. Focused on LLM application development and Agent system building. Skilled at combining large model capabilities with engineering practices to deliver practical AI applications. Continuous learner, pursuing clean and efficient engineering solutions.',
+    description: 'B.S. in Electronic Information Engineering from Northeastern University. Focused on LLM application development and Agent system building. Led the development of the VLM scoring module for a video highlight detection system during internship, improving manual filtering efficiency by 3x. Independently built NetworkOps AI, an intelligent O&M assistant covering RAG retrieval, Agent tool frameworks, and microservice architecture. Skilled at combining large model capabilities with engineering practices. Continuous learner, pursuing clean and efficient engineering solutions.',
     education: 'Education',
     university: 'Northeastern University',
     major: 'Electronic Information Engineering',
@@ -119,7 +119,7 @@ const enTranslations = {
   },
   contact: {
     title: 'Contact',
-    description: "Feel free to reach out for collaboration or tech discussions.",
+    description: "Looking for an Agent Application Development internship. Excited to connect with you!",
     email: 'Email',
     phone: 'Phone',
     location: 'Location',
