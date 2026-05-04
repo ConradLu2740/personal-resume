@@ -11,7 +11,7 @@ interface Translations {
 }
 
 // 中文翻译内容
-const zhTranslations: Translations = {
+const zhTranslations = {
   nav: {
     home: '首页',
     about: '关于我',
@@ -63,6 +63,8 @@ const zhTranslations: Translations = {
     name: '姓名',
     message: '消息内容',
     submit: '提交',
+    success: '消息已发送，感谢您的联系！',
+    error: '发送失败，请稍后重试或直接发送邮件。',
   },
   footer: {
     rights: '保留所有权利',
@@ -70,10 +72,10 @@ const zhTranslations: Translations = {
     and: '和',
     built: '构建',
   },
-}
+} satisfies Translations
 
 // 英文翻译内容
-const enTranslations: Translations = {
+const enTranslations = {
   nav: {
     home: 'Home',
     about: 'About',
@@ -125,6 +127,8 @@ const enTranslations: Translations = {
     name: 'Name',
     message: 'Message',
     submit: 'Submit',
+    success: 'Message sent! Thank you for reaching out.',
+    error: 'Failed to send. Please try again later or email directly.',
   },
   footer: {
     rights: 'All rights reserved',
@@ -132,7 +136,7 @@ const enTranslations: Translations = {
     and: 'and',
     built: 'built',
   },
-}
+} satisfies Translations
 
 // 翻译对象映射
 const translations: Record<Language, Translations> = {

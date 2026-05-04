@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import { Briefcase, Calendar, MapPin } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
@@ -46,15 +45,9 @@ function ExperienceCard({
   const { language, t } = useLanguage()
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-    >
-      <motion.div
-        whileHover={{ scale: 1.02 }}
-        className="p-5 sm:p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
+    <div className="animate-in-up">
+      <div
+        className="p-5 sm:p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all hover:scale-[1.02]"
       >
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
@@ -92,8 +85,8 @@ function ExperienceCard({
             </li>
           ))}
         </ul>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   )
 }
 

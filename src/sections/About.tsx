@@ -20,35 +20,35 @@ export default function About() {
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative"
+          <div
+            className="relative animate-in-left"
           >
             <div className="relative w-full max-w-xs sm:max-w-sm mx-auto aspect-square">
               {/* Background decoration */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-2xl transform rotate-6" />
               
-              {/* Image placeholder */}
+              {/* SVG Avatar */}
               <div className="relative w-full h-full bg-secondary rounded-2xl overflow-hidden flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-primary-500/20 rounded-full flex items-center justify-center">
-                    <span className="text-4xl">👨‍💻</span>
-                  </div>
-                  <p className="text-muted-foreground">你的照片</p>
-                </div>
+                <svg viewBox="0 0 200 200" className="w-4/5 h-4/5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="avatarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="hsl(201, 96%, 32%)" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="hsl(201, 96%, 42%)" stopOpacity="0.15" />
+                    </linearGradient>
+                  </defs>
+                  <circle cx="100" cy="75" r="38" fill="url(#avatarGrad)" stroke="hsl(201, 96%, 32%)" strokeWidth="2" strokeOpacity="0.4" />
+                  <ellipse cx="100" cy="160" rx="55" ry="40" fill="url(#avatarGrad)" stroke="hsl(201, 96%, 32%)" strokeWidth="2" strokeOpacity="0.4" />
+                  <circle cx="88" cy="70" r="3" fill="hsl(201, 96%, 32%)" fillOpacity="0.6" />
+                  <circle cx="112" cy="70" r="3" fill="hsl(201, 96%, 32%)" fillOpacity="0.6" />
+                  <path d="M92 82 Q100 90 108 82" stroke="hsl(201, 96%, 32%)" strokeWidth="2" fill="none" strokeOpacity="0.5" strokeLinecap="round" />
+                </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* About Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+          <div
+            className="animate-in-right"
           >
             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
               {t('about.description') as string}
@@ -80,7 +80,7 @@ export default function About() {
                 </div>
               </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

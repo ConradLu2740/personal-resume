@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import {
   Brain,
   Server,
@@ -100,11 +99,14 @@ const levelConfig: Record<SkillLevel, { label: string; labelEn: string; tagClass
   },
 }
 
-function SkillTag({ name, nameEn, tagClass }: { name: string; nameEn: string; tagClass: string }) {
+function SkillTag({ name, nameEn, tagClass, index }: { name: string; nameEn: string; tagClass: string; index: number }) {
   const { language } = useLanguage()
 
   return (
-    <span className={`inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-md border text-sm sm:text-base ${tagClass}`}>
+    <span
+      className={`inline-flex items-center px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-md border text-sm sm:text-base ${tagClass}`}
+      style={{ animationDelay: `${index * 0.05}s` }}
+    >
       {language === 'zh' ? name : nameEn}
     </span>
   )
@@ -121,12 +123,9 @@ function SkillCard({ category, index }: { category: SkillCategory; index: number
   })).filter((g) => g.skills.length > 0)
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.15 }}
-      className="p-5 sm:p-6 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
+    <div
+      className={`p-5 sm:p-6 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all animate-in-up`}
+      style={{ animationDelay: `${index * 0.15}s` }}
     >
       <div className="flex items-center gap-3 mb-5">
         <div className="p-3 rounded-lg bg-primary-500/20">
@@ -146,12 +145,13 @@ function SkillCard({ category, index }: { category: SkillCategory; index: number
                 {language === 'zh' ? config.label : config.labelEn}
               </span>
               <div className="inline-flex flex-wrap gap-2">
-                {group.skills.map((skill) => (
+                {group.skills.map((skill, skillIndex) => (
                   <SkillTag
                     key={skill.name}
                     name={skill.name}
                     nameEn={skill.nameEn}
                     tagClass={config.tagClass}
+                    index={skillIndex}
                   />
                 ))}
               </div>
@@ -159,7 +159,7 @@ function SkillCard({ category, index }: { category: SkillCategory; index: number
           )
         })}
       </div>
-    </motion.div>
+    </div>
   )
 }
 
