@@ -2,98 +2,120 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { 
-  Brain, 
-  Server, 
-  Code2, 
+import {
+  Brain,
+  Server,
+  Code2,
   Wrench,
 } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
 
-// 技能数据配置
-const skillsData = {
-  ai: {
+type SkillLevel = 'expert' | 'proficient' | 'familiar'
+
+interface Skill {
+  name: string
+  nameEn: string
+  level: SkillLevel
+}
+
+interface SkillCategory {
+  icon: typeof Brain
+  label: string
+  skills: Skill[]
+}
+
+const skillsData: SkillCategory[] = [
+  {
     icon: Brain,
     label: 'ai',
     skills: [
-      { name: 'LLM 应用开发 (Prompt Engineering)', level: 85 },
-      { name: 'LangChain / LlamaIndex', level: 80 },
-      { name: 'Agent 框架 (AutoGen / CrewAI)', level: 75 },
-      { name: 'RAG 检索增强生成', level: 80 },
-      { name: 'OpenAI / Claude API', level: 85 },
+      { name: 'LLM 应用开发', nameEn: 'LLM Application Dev', level: 'expert' },
+      { name: 'Prompt Engineering', nameEn: 'Prompt Engineering', level: 'expert' },
+      { name: 'LangChain / LlamaIndex', nameEn: 'LangChain / LlamaIndex', level: 'proficient' },
+      { name: 'Agent 框架', nameEn: 'Agent Frameworks', level: 'proficient' },
+      { name: 'RAG 检索增强生成', nameEn: 'RAG', level: 'proficient' },
+      { name: 'OpenAI / Claude API', nameEn: 'OpenAI / Claude API', level: 'expert' },
+      { name: 'Qwen-VL 多模态', nameEn: 'Qwen-VL Multi-modal', level: 'familiar' },
     ],
   },
-  backend: {
+  {
     icon: Server,
     label: 'backend',
     skills: [
-      { name: 'Python / FastAPI', level: 85 },
-      { name: 'Node.js / Express', level: 75 },
-      { name: 'PostgreSQL / MongoDB', level: 70 },
-      { name: 'Redis / 消息队列', level: 65 },
-      { name: 'RESTful API 设计', level: 80 },
+      { name: 'Python / FastAPI', nameEn: 'Python / FastAPI', level: 'expert' },
+      { name: 'Celery 异步任务', nameEn: 'Celery Async Tasks', level: 'proficient' },
+      { name: 'Node.js / Express', nameEn: 'Node.js / Express', level: 'proficient' },
+      { name: 'PostgreSQL / MongoDB', nameEn: 'PostgreSQL / MongoDB', level: 'proficient' },
+      { name: 'Redis / 消息队列', nameEn: 'Redis / Message Queue', level: 'familiar' },
+      { name: 'RESTful API 设计', nameEn: 'RESTful API Design', level: 'expert' },
+      { name: 'Go 语言', nameEn: 'Go', level: 'familiar' },
     ],
   },
-  frontend: {
+  {
     icon: Code2,
     label: 'frontend',
     skills: [
-      { name: 'React / Next.js', level: 75 },
-      { name: 'TypeScript', level: 70 },
-      { name: 'Tailwind CSS', level: 80 },
-      { name: 'HTML / CSS', level: 85 },
-      { name: 'Vue.js', level: 65 },
+      { name: 'React / Next.js', nameEn: 'React / Next.js', level: 'proficient' },
+      { name: 'TypeScript', nameEn: 'TypeScript', level: 'proficient' },
+      { name: 'Tailwind CSS', nameEn: 'Tailwind CSS', level: 'proficient' },
+      { name: 'HTML / CSS', nameEn: 'HTML / CSS', level: 'expert' },
+      { name: 'Vue.js', nameEn: 'Vue.js', level: 'familiar' },
     ],
   },
-  tools: {
+  {
     icon: Wrench,
     label: 'tools',
     skills: [
-      { name: 'Git / GitHub', level: 85 },
-      { name: 'Docker', level: 70 },
-      { name: 'Linux', level: 75 },
-      { name: '向量数据库 (Milvus / Pinecone)', level: 70 },
-      { name: 'CI/CD', level: 60 },
+      { name: 'Git / GitHub', nameEn: 'Git / GitHub', level: 'expert' },
+      { name: 'Docker / Compose', nameEn: 'Docker / Compose', level: 'proficient' },
+      { name: 'Linux', nameEn: 'Linux', level: 'proficient' },
+      { name: '向量数据库', nameEn: 'Vector Database', level: 'proficient' },
+      { name: 'Prometheus 监控', nameEn: 'Prometheus', level: 'familiar' },
+      { name: 'CI/CD', nameEn: 'CI/CD', level: 'familiar' },
     ],
+  },
+]
+
+const levelConfig: Record<SkillLevel, { label: string; labelEn: string; className: string }> = {
+  expert: {
+    label: '精通',
+    labelEn: 'Expert',
+    className: 'bg-primary-500/25 text-primary-300 border-primary-500/40 ring-1 ring-primary-500/20',
+  },
+  proficient: {
+    label: '熟练',
+    labelEn: 'Proficient',
+    className: 'bg-primary-500/15 text-primary-400/90 border-primary-500/25',
+  },
+  familiar: {
+    label: '了解',
+    labelEn: 'Familiar',
+    className: 'bg-secondary text-muted-foreground border-border',
   },
 }
 
-// 技能进度条组件
-function SkillBar({ name, level, index }: { name: string; level: number; index: number }) {
+function SkillTag({ skill, index }: { skill: Skill; index: number }) {
+  const { language } = useLanguage()
+  const config = levelConfig[skill.level]
+
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="mb-4"
+      transition={{ delay: index * 0.05, duration: 0.3 }}
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm transition-transform hover:scale-105 ${config.className}`}
     >
-      <div className="flex justify-between items-center mb-2">
-        <span className="font-medium">{name}</span>
-        <span className="text-sm text-muted-foreground">{level}%</span>
-      </div>
-      <div className="h-2 bg-secondary rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-gradient-to-r from-primary-400 to-primary-600 rounded-full"
-          initial={{ width: 0 }}
-          whileInView={{ width: `${level}%` }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: index * 0.1, ease: 'easeOut' }}
-        />
-      </div>
+      <span>{language === 'zh' ? skill.name : skill.nameEn}</span>
+      <span className="text-[10px] opacity-60">
+        {language === 'zh' ? config.label : config.labelEn}
+      </span>
     </motion.div>
   )
 }
 
-// 技能卡片组件
-function SkillCard({ 
-  category, 
-  index 
-}: { 
-  category: typeof skillsData.ai; 
-  index: number 
-}) {
+function SkillCard({ category, index }: { category: SkillCategory; index: number }) {
   const { t } = useLanguage()
   const Icon = category.icon
 
@@ -105,7 +127,7 @@ function SkillCard({
       transition={{ delay: index * 0.15 }}
       className="p-6 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
     >
-      <div className="flex items-center gap-3 mb-6">
+      <div className="flex items-center gap-3 mb-5">
         <div className="p-3 rounded-lg bg-primary-500/20">
           <Icon className="w-6 h-6 text-primary-400" />
         </div>
@@ -113,20 +135,16 @@ function SkillCard({
           {t(`skills.${category.label}`) as string}
         </h3>
       </div>
-      
-      {category.skills.map((skill, skillIndex) => (
-        <SkillBar
-          key={skill.name}
-          name={skill.name}
-          level={skill.level}
-          index={skillIndex}
-        />
-      ))}
+
+      <div className="flex flex-wrap gap-2">
+        {category.skills.map((skill, skillIndex) => (
+          <SkillTag key={skill.name} skill={skill} index={skillIndex} />
+        ))}
+      </div>
     </motion.div>
   )
 }
 
-// 技能栈主组件
 export default function Skills() {
   const { t } = useLanguage()
 
@@ -139,7 +157,7 @@ export default function Skills() {
         />
 
         <div className="grid md:grid-cols-2 gap-8">
-          {Object.values(skillsData).map((category, index) => (
+          {skillsData.map((category, index) => (
             <SkillCard key={category.label} category={category} index={index} />
           ))}
         </div>
