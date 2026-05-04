@@ -39,54 +39,27 @@ const projectsData = [
     id: 2,
     title: '视频名场面智能检测系统',
     titleEn: 'Video Highlight Intelligent Detection System',
-    description: '基于多模态大模型的视频名场面智能检测系统，自动完成场景切割、关键帧提取、VLM 智能评分、语音转写，输出名场面判定结果与视频片段导出。',
-    descriptionEn: 'A multi-modal LLM-based video highlight intelligent detection system that automatically performs scene segmentation, keyframe extraction, VLM scoring, and speech transcription to output highlight detection results and video clips.',
+    description: '【实习项目】基于多模态大模型的视频名场面智能检测系统，自动完成场景切割、关键帧提取、VLM 智能评分、语音转写。本人主要负责 VLM 评分模块与异步任务流水线。',
+    descriptionEn: '[Internship Project] A multi-modal LLM-based video highlight detection system with automatic scene segmentation, keyframe extraction, VLM scoring, and speech transcription. Primarily responsible for the VLM scoring module and async task pipeline.',
     tags: ['Python', 'FastAPI', 'Qwen-VL', 'Celery', 'Docker'],
     emoji: '🎬',
     github: 'https://github.com/ConradLu2740/video-analyzer',
     demo: '#',
     features: [
-      '基于 PySceneDetect 的场景自动切割',
-      'FFmpeg 关键帧提取 + Qwen-VL 视觉语言模型评分',
-      'Faster-Whisper 语音转录与后处理',
-      'Celery 异步任务队列 + Redis 消息代理',
-      '多租户认证、配额管理、熔断限流',
-      'Docker Compose 微服务编排 + Prometheus 监控',
+      'PySceneDetect 场景切割，自动识别视频转场点，替代人工分段',
+      'FFmpeg 关键帧提取 + Qwen-VL 评分，将"名场面"量化为可比较的分数，筛选效率提升约 3 倍',
+      'Faster-Whisper 语音转录，为评分提供文本维度补充',
+      'Celery + Redis 异步流水线，场景检测→评分→转录全流程自动化',
+      '多租户认证与熔断限流，支撑多客户并发，零宕机运行',
+      'Docker Compose 微服务编排 + Prometheus 监控，一键部署可观测',
     ],
     featuresEn: [
-      'Automatic scene segmentation with PySceneDetect',
-      'FFmpeg keyframe extraction + Qwen-VL scoring',
-      'Faster-Whisper speech transcription & post-processing',
-      'Celery async task queue + Redis message broker',
-      'Multi-tenant auth, quota management, circuit breaker & rate limiting',
-      'Docker Compose microservice orchestration + Prometheus monitoring',
-    ],
-  },
-  {
-    id: 3,
-    title: '个人作品集网站',
-    titleEn: 'Personal Portfolio Website',
-    description: '基于 Next.js 14 构建的个人作品集网站，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages。',
-    descriptionEn: 'A personal portfolio website built with Next.js 14, featuring dark/light theme toggle, Chinese/English bilingual support, Framer Motion animations, deployed on Cloudflare Pages.',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    emoji: '🌐',
-    github: 'https://github.com/ConradLu2740/personal-resume',
-    demo: 'https://luxiyuan-portfolio.pages.dev',
-    features: [
-      'Next.js 14 App Router + TypeScript',
-      '暗黑/亮色主题切换 (next-themes)',
-      '中英文双语国际化 (i18n)',
-      'Framer Motion 滚动动画与交互',
-      '响应式设计，适配移动端',
-      'Cloudflare Pages 全球 CDN 部署',
-    ],
-    featuresEn: [
-      'Next.js 14 App Router + TypeScript',
-      'Dark/Light theme toggle (next-themes)',
-      'Chinese/English bilingual i18n',
-      'Framer Motion scroll animations & interactions',
-      'Responsive design for mobile devices',
-      'Cloudflare Pages global CDN deployment',
+      'PySceneDetect scene segmentation, auto-detecting transitions to replace manual splitting',
+      'FFmpeg keyframe extraction + Qwen-VL scoring, quantifying "highlights" into comparable scores, ~3x filtering efficiency',
+      'Faster-Whisper speech transcription, adding text dimension to scoring',
+      'Celery + Redis async pipeline, automating the full workflow: detection → scoring → transcription',
+      'Multi-tenant auth and circuit breaker, supporting concurrent clients with zero downtime',
+      'Docker Compose microservice orchestration + Prometheus monitoring, one-click observable deployment',
     ],
   },
 ]
@@ -259,7 +232,7 @@ export default function Projects() {
           subtitle=""
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
             <div key={project.id} onClick={() => setSelectedProject(project)}>
               <ProjectCard project={project} index={index} />
