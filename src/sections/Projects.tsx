@@ -108,7 +108,7 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
     >
       <div className="relative overflow-hidden rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all">
         {/* Project Image */}
-        <div className="relative h-48 bg-secondary overflow-hidden">
+        <div className="relative h-36 sm:h-48 bg-secondary overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-6xl">{project.emoji}</div>
           </div>
@@ -146,11 +146,11 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
         </div>
 
         {/* Content */}
-        <div className="p-6">
-          <h3 className="text-xl font-semibold mb-2">
+        <div className="p-4 sm:p-6">
+          <h3 className="text-lg sm:text-xl font-semibold mb-2">
             {language === 'zh' ? project.title : project.titleEn}
           </h3>
-          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+          <p className="text-muted-foreground text-sm sm:text-base mb-4 line-clamp-2">
             {language === 'zh' ? project.description : project.descriptionEn}
           </p>
           
@@ -187,7 +187,7 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="relative max-w-2xl w-full bg-background rounded-2xl p-8 border border-border max-h-[80vh] overflow-y-auto"
+        className="relative max-w-2xl w-full bg-background rounded-2xl p-5 sm:p-8 border border-border max-h-[85vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -252,7 +252,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null)
 
   return (
-    <section id="projects" className="py-20 md:py-32">
+    <section id="projects" className="py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title={t('projects.title') as string}

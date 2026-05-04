@@ -11,14 +11,14 @@ export default function About() {
   const { t } = useLanguage()
 
   return (
-    <section id="about" className="py-20 md:py-32">
+    <section id="about" className="py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title={t('about.title') as string}
           subtitle=""
         />
 
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -27,7 +27,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
             className="relative"
           >
-            <div className="relative w-full max-w-md mx-auto aspect-square">
+            <div className="relative w-full max-w-xs sm:max-w-sm mx-auto aspect-square">
               {/* Background decoration */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-primary-600/20 rounded-2xl transform rotate-6" />
               
@@ -50,7 +50,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
               {t('about.description') as string}
             </p>
 

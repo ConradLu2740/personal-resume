@@ -19,7 +19,7 @@ export default function SectionTitle({ title, subtitle, centered = true }: Secti
       transition={{ duration: 0.5 }}
       className={`mb-12 ${centered ? 'text-center' : ''}`}
     >
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
         <span className="bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
           {title}
         </span>

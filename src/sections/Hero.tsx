@@ -70,7 +70,7 @@ export default function Hero() {
         >
           {/* Greeting */}
           <motion.p
-            className="text-lg md:text-xl text-muted-foreground mb-4"
+            className="text-xl md:text-2xl text-muted-foreground mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -80,7 +80,7 @@ export default function Hero() {
 
           {/* Name */}
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
@@ -92,7 +92,7 @@ export default function Hero() {
 
           {/* Title */}
           <motion.h2
-            className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-6 text-foreground"
+            className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-6 text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
@@ -102,7 +102,7 @@ export default function Hero() {
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10"
+            className="text-lg sm:text-xl md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 px-4 sm:px-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7 }}

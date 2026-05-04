@@ -54,7 +54,7 @@ function ExperienceCard({
     >
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className="p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
+        className="p-5 sm:p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
       >
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
@@ -102,7 +102,7 @@ export default function Experience() {
   const { t } = useLanguage()
 
   return (
-    <section id="experience" className="py-20 md:py-32">
+    <section id="experience" className="py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title={t('experience.title') as string}

@@ -84,7 +84,7 @@ export default function Navbar() {
             {/* Language Toggle */}
             <button
               onClick={() => setLanguage(language === 'zh' ? 'en' : 'zh')}
-              className="p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
+              className="flex items-center p-2 rounded-lg bg-secondary hover:bg-secondary/80 transition-colors"
               title={language === 'zh' ? 'Switch to English' : '切换到中文'}
             >
               <Globe className="w-4 h-4" />
@@ -150,7 +150,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => scrollToSection(link.href)}
-                  className="block w-full text-left px-4 py-3 rounded-lg hover:bg-secondary transition-colors"
+                  className="block w-full text-left px-4 py-3 rounded-lg hover:bg-secondary transition-colors text-base"
                 >
                   {link.label}
                 </motion.button>

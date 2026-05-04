@@ -105,7 +105,7 @@ function SkillTag({ skill, index }: { skill: Skill; index: number }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05, duration: 0.3 }}
-      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-sm transition-transform hover:scale-105 ${config.className}`}
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 sm:px-3.5 sm:py-2 rounded-lg border text-sm sm:text-base transition-transform hover:scale-105 ${config.className}`}
     >
       <span>{language === 'zh' ? skill.name : skill.nameEn}</span>
       <span className="text-[10px] opacity-60">
@@ -149,7 +149,7 @@ export default function Skills() {
   const { t } = useLanguage()
 
   return (
-    <section id="skills" className="py-20 md:py-32 bg-secondary/30">
+    <section id="skills" className="py-16 md:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title={t('skills.title') as string}
