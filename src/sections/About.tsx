@@ -80,27 +80,6 @@ export default function About() {
                 </div>
               </motion.div>
             </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-3 gap-4 mt-8">
-              {[
-                { label: '实习经历', value: '1' },
-                { label: '项目', value: '5+' },
-                { label: '技术栈', value: '8+' },
-              ].map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-center p-4 rounded-lg bg-secondary/50"
-                >
-                  <div className="text-2xl font-bold text-primary-400">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
           </motion.div>
         </div>
       </div>

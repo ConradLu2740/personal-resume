@@ -23,13 +23,13 @@ const zhTranslations: Translations = {
   hero: {
     greeting: '你好，我是',
     title: 'Agent 应用开发实习生',
-    subtitle: '热爱 LLM 与 Agent 应用开发，专注于构建智能、高效的 AI 应用与后端服务',
+    subtitle: '用 AI 解决真实问题',
     viewProjects: '查看项目',
     contactMe: '联系我',
   },
   about: {
     title: '关于我',
-    description: '我是一名充满热情的 Agent 应用开发实习生，对 LLM 大模型、Agent 框架和 AI 应用开发有深入理解。我专注于使用现代技术栈构建智能、高效的 AI 应用与后端服务，持续关注前沿技术发展。',
+    description: '东北大学电子信息工程本科，专注于 LLM 应用开发与 Agent 系统构建。善于将大模型能力与工程实践结合，落地可用的智能应用。持续学习，追求简洁高效的工程方案。',
     education: '教育背景',
     university: '东北大学',
     major: '电子信息工程',
@@ -55,7 +55,7 @@ const zhTranslations: Translations = {
   },
   contact: {
     title: '联系方式',
-    description: '如果你对我的工作感兴趣，或者想讨论 AI、Agent 相关技术问题，欢迎随时联系我！',
+    description: '欢迎联系我，交流合作或技术讨论均可。',
     email: '邮箱',
     phone: '电话',
     location: '地点',
@@ -85,13 +85,13 @@ const enTranslations: Translations = {
   hero: {
     greeting: "Hi, I'm",
     title: 'Agent Application Development Intern',
-    subtitle: 'Passionate about LLM and Agent application development, focused on building intelligent and efficient AI applications and backend services',
+    subtitle: 'Solving real problems with AI',
     viewProjects: 'View Projects',
     contactMe: 'Contact Me',
   },
   about: {
     title: 'About Me',
-    description: 'I am a passionate Agent application development intern with deep understanding of LLM, Agent frameworks, and AI application development. I focus on building intelligent and efficient AI applications and backend services using modern technology stacks.',
+    description: 'B.S. in Electronic Information Engineering from Northeastern University. Focused on LLM application development and Agent system building. Skilled at combining large model capabilities with engineering practices to deliver practical AI applications. Continuous learner, pursuing clean and efficient engineering solutions.',
     education: 'Education',
     university: 'Northeastern University',
     major: 'Electronic Information Engineering',
@@ -117,7 +117,7 @@ const enTranslations: Translations = {
   },
   contact: {
     title: 'Contact',
-    description: "If you're interested in my work or want to discuss AI and Agent related topics, feel free to reach out!",
+    description: "Feel free to reach out for collaboration or tech discussions.",
     email: 'Email',
     phone: 'Phone',
     location: 'Location',
