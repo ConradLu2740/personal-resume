@@ -39,31 +39,54 @@ const projectsData = [
     id: 2,
     title: '视频名场面智能检测系统',
     titleEn: 'Video Highlight Intelligent Detection System',
-    description: '【实习项目】基于多模态大模型的视频名场面智能检测系统，44 个 Python 源文件 + 3 个微服务。本人主要负责 VLM 评分模块与异步任务流水线。',
-    descriptionEn: '[Internship Project] A multi-modal LLM-based video highlight detection system, 44 Python source files + 3 microservices. Primarily responsible for the VLM scoring module and async task pipeline.',
-    tags: ['Python', 'FastAPI', 'Qwen-VL', 'Celery', 'Docker'],
+    description: '【实习项目】基于大模型的视频高光片段自动检测 Agent，44 个 Python 源文件 + 3 个微服务。独立设计并落地端到端智能体，通过大模型理解视频内容，自动识别精彩片段并输出结构化结果。',
+    descriptionEn: '[Internship Project] A LLM-based video highlight auto-detection Agent, 44 Python source files + 3 microservices. Independently designed and deployed an end-to-end agent that understands video content via large models, automatically identifies highlight clips and outputs structured results.',
+    tags: ['Python', 'FastAPI', 'Qwen-VL', 'FFmpeg', 'Agent'],
     emoji: '🎬',
     github: 'https://github.com/ConradLu2740/video-analyzer',
     demo: '#',
     features: [
-      'PySceneDetect 场景切割，自动识别视频转场点，替代人工分段，单视频处理耗时 < 30s',
-      'FFmpeg 关键帧提取 + Qwen-VL 评分，将"名场面"量化为 0-100 分，筛选效率较人工提升约 3 倍',
-      'Faster-Whisper 语音转录，为评分提供文本维度补充，中文识别准确率 > 90%',
-      'Celery + Redis 异步流水线，场景检测→评分→转录全流程自动化，支持并发处理 10+ 视频',
-      '多租户认证与熔断限流，支撑多客户并发，零宕机运行',
-      'Docker Compose 编排 3 个微服务（场景检测/VLM/Whisper）+ Prometheus 监控，一键部署可观测',
+      'Agent 流水线：场景分割 → 关键帧提取 → 大模型视觉评分 → 语音转写 → 语义去重合并 → 片段裁剪导出，实现无人值守闭环',
+      'Prompt 工程：设计 8 维度评分 Prompt（视觉冲击、情绪强度、表情等），将主观判断显式化，引导模型输出可解释评分',
+      '效率优化：引入 MD5 缓存与国产模型 API 成本优化，单视频分析从 2 小时压缩至 5 分钟，效率提升 80%',
+      '工具封装：将 FFmpeg 封装为 Agent 可调用工具，实现视频片段自动裁剪与导出',
+      '架构设计：抽象「感知 → 理解 → 决策 → 执行」Agent 架构，项目已开源至 GitHub',
     ],
     featuresEn: [
-      'PySceneDetect scene segmentation, auto-detecting transitions, replacing manual splitting, <30s per video',
-      'FFmpeg keyframe extraction + Qwen-VL scoring, quantifying "highlights" into 0-100 scores, ~3x filtering efficiency over manual',
-      'Faster-Whisper speech transcription, adding text dimension to scoring, >90% Chinese recognition accuracy',
-      'Celery + Redis async pipeline, automating detection → scoring → transcription, supporting 10+ concurrent videos',
-      'Multi-tenant auth and circuit breaker, supporting concurrent clients with zero downtime',
-      'Docker Compose orchestrating 3 microservices (Scene/VLM/Whisper) + Prometheus monitoring, one-click observable deployment',
+      'Agent Pipeline: Scene Segmentation → Keyframe Extraction → LLM Visual Scoring → Speech Transcription → Semantic Deduplication → Clip Export, achieving unattended closed-loop',
+      'Prompt Engineering: Designed 8-dimension scoring Prompt (visual impact, emotional intensity, facial expressions, etc.), making subjective judgments explicit and interpretable',
+      'Efficiency Optimization: Introduced MD5 caching and domestic model API cost optimization, compressing analysis from 2 hours to 5 minutes, 80% efficiency improvement',
+      'Tool Encapsulation: Wrapped FFmpeg as Agent-callable tool for automatic clip cropping and export',
+      'Architecture Design: Abstracted "Perception → Understanding → Decision → Execution" Agent architecture, project open-sourced on GitHub',
     ],
   },
   {
     id: 3,
+    title: 'SteganoGAN-Transformer',
+    titleEn: 'SteganoGAN-Transformer',
+    description: '【本科毕设】针对图像隐写任务提出的端到端模型，利用自注意力机制提升隐写性能。PSNR 达 41.675dB，SSIM 达 0.957，显著优于 VGG、ResNet 等主流骨干网络。',
+    descriptionEn: '[Bachelor Thesis] An end-to-end model for image steganography using self-attention mechanism. Achieved PSNR 41.675dB and SSIM 0.957, significantly outperforming VGG, ResNet and other mainstream backbones.',
+    tags: ['Python', 'PyTorch', 'Deep Learning', 'Computer Vision'],
+    emoji: '🖼️',
+    github: 'https://github.com/ConradLu2740',
+    demo: '#',
+    features: [
+      '提出 SteganoGAN-Transformer 端到端模型，利用自注意力机制捕获图像全局依赖关系，提升隐写容量与不可感知性',
+      '应用混合精度训练（AMP）与数据加载优化，训练速度提升 15%',
+      '引入混沌加密增强安全性，提升隐写内容抗检测能力',
+      '最终模型 PSNR 达 41.675dB，SSIM 达 0.957，显著优于 VGG、ResNet 等主流骨干网络',
+      '独立完成从文献调研、模型设计、实验验证到论文撰写的全流程',
+    ],
+    featuresEn: [
+      'Proposed SteganoGAN-Transformer end-to-end model using self-attention mechanism to capture global image dependencies, improving steganography capacity and imperceptibility',
+      'Applied mixed precision training (AMP) and data loading optimization, improving training speed by 15%',
+      'Introduced chaotic encryption to enhance security and improve anti-detection capability of steganographic content',
+      'Final model achieved PSNR 41.675dB and SSIM 0.957, significantly outperforming VGG, ResNet and other mainstream backbones',
+      'Independently completed the entire process from literature research, model design, experimental validation to thesis writing',
+    ],
+  },
+  {
+    id: 4,
     title: '个人作品集网站',
     titleEn: 'Personal Portfolio Website',
     description: '【本项目即您当前浏览的网站】基于 Next.js 14 构建的个人作品集网站，18 个源文件，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages 全球 CDN。',
@@ -259,7 +282,7 @@ export default function Projects() {
           subtitle=""
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
             <div key={project.id} onClick={() => setSelectedProject(project)}>
               <ProjectCard project={project} index={index} />

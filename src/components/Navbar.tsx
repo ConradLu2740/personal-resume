@@ -29,6 +29,7 @@ export default function Navbar() {
     { href: '#skills', label: t('nav.skills') as string },
     { href: '#projects', label: t('nav.projects') as string },
     { href: '#experience', label: t('nav.experience') as string },
+    { href: '#honors', label: t('nav.honors') as string },
     { href: '#contact', label: t('nav.contact') as string },
   ]
 

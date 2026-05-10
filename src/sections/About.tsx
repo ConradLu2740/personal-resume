@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { GraduationCap, MapPin, Calendar } from 'lucide-react'
+import { GraduationCap, MapPin, Calendar, Star } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
 
@@ -55,7 +55,7 @@ export default function About() {
             </p>
 
             {/* Education */}
-            <div className="space-y-4">
+            <div className="space-y-4 mb-8">
               <h3 className="text-xl font-semibold flex items-center gap-2">
                 <GraduationCap className="w-5 h-5 text-primary-400" />
                 {t('about.education') as string}
@@ -79,6 +79,27 @@ export default function About() {
                   </span>
                 </div>
               </motion.div>
+            </div>
+
+            {/* Self Evaluation */}
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold flex items-center gap-2">
+                <Star className="w-5 h-5 text-primary-400" />
+                {t('about.selfEvalTitle') as string}
+              </h3>
+              
+              <div className="space-y-3">
+                {(t('about.selfEval') as string[]).map((item, index) => (
+                  <motion.div
+                    key={index}
+                    className="p-4 rounded-xl bg-secondary/50 border border-border"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <p className="text-sm text-muted-foreground leading-relaxed">{item}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

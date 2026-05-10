@@ -92,13 +92,23 @@ export default function Hero() {
 
           {/* Title */}
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-semibold mb-6 text-foreground"
+            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3 text-foreground"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            Agent 应用开发实习生
+            {t('hero.title') as string}
           </motion.h2>
+
+          {/* Meta Info */}
+          <motion.p
+            className="text-sm sm:text-base text-primary-400/80 mb-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
+          >
+            {t('hero.metaInfo') as string}
+          </motion.p>
 
           {/* Subtitle */}
           <motion.p

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
+import { obfuscateEmail, createMailtoLink } from '@/lib/obfuscate'
 
 const contactInfo = [
   {
@@ -11,18 +12,21 @@ const contactInfo = [
     label: 'email',
     value: 'luxiyuan2020@163.com',
     href: 'mailto:luxiyuan2020@163.com',
+    displayValue: obfuscateEmail('luxiyuan2020@163.com'),
   },
   {
     icon: Phone,
     label: 'phone',
     value: '13906573716',
     href: 'tel:13906573716',
+    displayValue: '139-0657-3716',
   },
   {
     icon: MapPin,
     label: 'location',
     value: '杭州市',
     href: '#',
+    displayValue: '杭州市',
   },
 ]
 
@@ -36,11 +40,12 @@ function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const subject = encodeURIComponent(`来自 ${formData.name} 的消息`)
-    const body = encodeURIComponent(
+    const mailto = createMailtoLink(
+      'luxiyuan2020@163.com',
+      `来自 ${formData.name} 的消息`,
       `发件人: ${formData.name}\n邮箱: ${formData.email}\n\n${formData.message}`
     )
-    window.open(`mailto:luxiyuan2020@163.com?subject=${subject}&body=${body}`, '_blank')
+    window.open(mailto, '_blank')
   }
 
   return (
@@ -87,6 +92,15 @@ function ContactForm() {
         />
       </div>
 
+      <div className="hidden" aria-hidden="true">
+        <input
+          type="text"
+          name="website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <button
         type="submit"
         className="w-full px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
@@ -114,9 +128,7 @@ export default function Contact() {
         />
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <div className="space-y-8 animate-in-left">
-            {/* Contact Details */}
             <div className="space-y-4">
               {contactInfo.map((item) => (
                 <a
@@ -131,13 +143,19 @@ export default function Contact() {
                     <p className="text-sm text-muted-foreground">
                       {t(`contact.${item.label}`) as string}
                     </p>
-                    <p className="font-medium">{item.value}</p>
+                    {item.label === 'email' ? (
+                      <p
+                        className="font-medium"
+                        dangerouslySetInnerHTML={{ __html: item.displayValue as string }}
+                      />
+                    ) : (
+                      <p className="font-medium">{item.displayValue}</p>
+                    )}
                   </div>
                 </a>
               ))}
             </div>
 
-            {/* Social Links */}
             <div>
               <h3 className="text-lg font-semibold mb-4">GitHub</h3>
               <div className="flex gap-4">
@@ -156,7 +174,6 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Contact Form */}
           <ContactForm />
         </div>
       </div>
