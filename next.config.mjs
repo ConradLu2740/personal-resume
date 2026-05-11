@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    useLightningcss: true,
+  },
   async headers() {
     return [
       {
@@ -15,7 +18,7 @@ const nextConfig = {
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            value: 'DENY',
           },
           {
             key: 'Referrer-Policy',
@@ -27,7 +30,7 @@ const nextConfig = {
           },
         ],
       },
-    ];
+    ]
   },
 }
 

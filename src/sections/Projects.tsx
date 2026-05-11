@@ -1,10 +1,14 @@
 'use client'
 
-import React, { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ExternalLink, X, ChevronRight } from 'lucide-react'
-import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
+import { GitHubIcon } from '@/components/icons'
+import { useLanguage } from '@/components/language-provider'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Bot, ChevronRight, ExternalLink, Globe, Image as ImageIcon, Video, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+
+/** 项目图标映射 */
+const projectIcons = [Bot, Video, ImageIcon, Globe]
 
 // 项目数据配置
 const projectsData = [
@@ -12,8 +16,10 @@ const projectsData = [
     id: 1,
     title: '智能网络运维助手',
     titleEn: 'NetworkOps AI — Intelligent Network O&M Assistant',
-    description: '面向通信行业运维场景的智能助手系统，融合 RAG 检索增强生成、Agent 工具调用、实时日志分析，实现从故障发现到自动化修复的全链路运维闭环。Python + Go + React 三层架构，17,653 行代码，92 个源文件。',
-    descriptionEn: 'An intelligent assistant system for telecom network O&M, integrating RAG, Agent tool invocation, and real-time log analysis for full-loop O&M from fault detection to automated remediation. Python + Go + React architecture, 17,653 lines of code, 92 source files.',
+    description:
+      '面向通信行业运维场景的智能助手系统，融合 RAG 检索增强生成、Agent 工具调用、实时日志分析，实现从故障发现到自动化修复的全链路运维闭环。Python + Go + React 三层架构，17,653 行代码，92 个源文件。',
+    descriptionEn:
+      'An intelligent assistant system for telecom network O&M, integrating RAG, Agent tool invocation, and real-time log analysis for full-loop O&M from fault detection to automated remediation. Python + Go + React architecture, 17,653 lines of code, 92 source files.',
     tags: ['Python', 'FastAPI', 'React', 'RAG', 'Agent', 'Go'],
     emoji: '🤖',
     github: 'https://github.com/ConradLu2740/networkops-ai',
@@ -39,8 +45,10 @@ const projectsData = [
     id: 2,
     title: '视频名场面智能检测系统',
     titleEn: 'Video Highlight Intelligent Detection System',
-    description: '【实习项目】基于大模型的视频高光片段自动检测 Agent，44 个 Python 源文件 + 3 个微服务。独立设计并落地端到端智能体，通过大模型理解视频内容，自动识别精彩片段并输出结构化结果。',
-    descriptionEn: '[Internship Project] A LLM-based video highlight auto-detection Agent, 44 Python source files + 3 microservices. Independently designed and deployed an end-to-end agent that understands video content via large models, automatically identifies highlight clips and outputs structured results.',
+    description:
+      '【实习项目】基于大模型的视频高光片段自动检测 Agent，44 个 Python 源文件 + 3 个微服务。独立设计并落地端到端智能体，通过大模型理解视频内容，自动识别精彩片段并输出结构化结果。',
+    descriptionEn:
+      '[Internship Project] A LLM-based video highlight auto-detection Agent, 44 Python source files + 3 microservices. Independently designed and deployed an end-to-end agent that understands video content via large models, automatically identifies highlight clips and outputs structured results.',
     tags: ['Python', 'FastAPI', 'Qwen-VL', 'FFmpeg', 'Agent'],
     emoji: '🎬',
     github: 'https://github.com/ConradLu2740/video-analyzer',
@@ -64,8 +72,10 @@ const projectsData = [
     id: 3,
     title: 'SteganoGAN-Transformer',
     titleEn: 'SteganoGAN-Transformer',
-    description: '【本科毕设】针对图像隐写任务提出的端到端模型，利用自注意力机制提升隐写性能。PSNR 达 41.675dB，SSIM 达 0.957，显著优于 VGG、ResNet 等主流骨干网络。',
-    descriptionEn: '[Bachelor Thesis] An end-to-end model for image steganography using self-attention mechanism. Achieved PSNR 41.675dB and SSIM 0.957, significantly outperforming VGG, ResNet and other mainstream backbones.',
+    description:
+      '【本科毕设】针对图像隐写任务提出的端到端模型，利用自注意力机制提升隐写性能。PSNR 达 41.675dB，SSIM 达 0.957，显著优于 VGG、ResNet 等主流骨干网络。',
+    descriptionEn:
+      '[Bachelor Thesis] An end-to-end model for image steganography using self-attention mechanism. Achieved PSNR 41.675dB and SSIM 0.957, significantly outperforming VGG, ResNet and other mainstream backbones.',
     tags: ['Python', 'PyTorch', 'Deep Learning', 'Computer Vision'],
     emoji: '🖼️',
     github: 'https://github.com/ConradLu2740',
@@ -89,8 +99,10 @@ const projectsData = [
     id: 4,
     title: '个人作品集网站',
     titleEn: 'Personal Portfolio Website',
-    description: '【本项目即您当前浏览的网站】基于 Next.js 14 构建的个人作品集网站，18 个源文件，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages 全球 CDN。',
-    descriptionEn: '[This is the website you are currently browsing] A personal portfolio website built with Next.js 14, 18 source files, featuring dark/light theme toggle, Chinese/English bilingual support, Framer Motion animations, deployed on Cloudflare Pages global CDN.',
+    description:
+      '【本项目即您当前浏览的网站】基于 Next.js 14 构建的个人作品集网站，18 个源文件，支持暗黑/亮色主题切换、中英文双语、Framer Motion 动画，部署在 Cloudflare Pages 全球 CDN。',
+    descriptionEn:
+      '[This is the website you are currently browsing] A personal portfolio website built with Next.js 14, 18 source files, featuring dark/light theme toggle, Chinese/English bilingual support, Framer Motion animations, deployed on Cloudflare Pages global CDN.',
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     emoji: '🌐',
     github: 'https://github.com/ConradLu2740/personal-resume',
@@ -115,9 +127,10 @@ const projectsData = [
 ]
 
 // 项目卡片组件
-function ProjectCard({ project, index }: { project: typeof projectsData[0]; index: number }) {
+function ProjectCard({ project, index }: { project: (typeof projectsData)[0]; index: number }) {
   const { language } = useLanguage()
   const [isHovered, setIsHovered] = useState(false)
+  const IconComponent = projectIcons[index] || Bot
 
   return (
     <motion.div
@@ -133,9 +146,9 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
         {/* Project Image */}
         <div className="relative h-36 sm:h-48 bg-secondary overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-6xl">{project.emoji}</div>
+            <IconComponent size={48} className="text-primary-400/60" />
           </div>
-          
+
           {/* Overlay on hover */}
           <motion.div
             className="absolute inset-0 bg-primary-500/80 flex items-center justify-center"
@@ -150,9 +163,7 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
                 rel="noopener noreferrer"
                 className="p-3 bg-white/20 rounded-full hover:bg-white/30 transition-colors"
               >
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
+                <GitHubIcon className="w-6 h-6 text-white" />
               </a>
               {project.demo !== '#' && (
                 <a
@@ -176,7 +187,7 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
           <p className="text-muted-foreground text-sm sm:text-base mb-4 line-clamp-2">
             {language === 'zh' ? project.description : project.descriptionEn}
           </p>
-          
+
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
             {project.tags.map((tag) => (
@@ -195,8 +206,28 @@ function ProjectCard({ project, index }: { project: typeof projectsData[0]; inde
 }
 
 // 项目详情弹窗
-function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; onClose: () => void }) {
+function ProjectModal({
+  project,
+  onClose,
+}: { project: (typeof projectsData)[0]; onClose: () => void }) {
   const { language } = useLanguage()
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  /** 处理 Escape 键关闭弹窗与 body 滚动锁定 */
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    if (project) {
+      document.addEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'hidden'
+      modalRef.current?.focus()
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'unset'
+    }
+  }, [project, onClose])
 
   return (
     <motion.div
@@ -205,32 +236,36 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
     >
       <motion.div
+        ref={modalRef}
+        tabIndex={-1}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="relative max-w-2xl w-full bg-background rounded-2xl p-5 sm:p-8 border border-border max-h-[85vh] overflow-y-auto"
+        className="relative max-w-2xl w-full bg-background rounded-2xl p-5 sm:p-8 border border-border max-h-[85vh] overflow-y-auto outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-2 rounded-lg hover:bg-secondary transition-colors"
+          aria-label={language === 'zh' ? '关闭' : 'Close'}
         >
           <X className="w-5 h-5" />
         </button>
 
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 id="modal-title" className="text-2xl font-bold mb-4">
           {language === 'zh' ? project.title : project.titleEn}
         </h2>
-        
+
         <p className="text-muted-foreground mb-6">
           {language === 'zh' ? project.description : project.descriptionEn}
         </p>
 
-        <h3 className="font-semibold mb-3">
-          {language === 'zh' ? '核心功能' : 'Core Features'}
-        </h3>
+        <h3 className="font-semibold mb-3">{language === 'zh' ? '核心功能' : 'Core Features'}</h3>
         <ul className="space-y-2 mb-6">
           {(language === 'zh' ? project.features : project.featuresEn).map((feature, index) => (
             <li key={index} className="flex items-start gap-2">
@@ -247,9 +282,7 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
           >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
+            <GitHubIcon className="w-4 h-4" />
             {language === 'zh' ? '源代码' : 'Source Code'}
           </a>
           {project.demo !== '#' && (
@@ -272,19 +305,27 @@ function ProjectModal({ project, onClose }: { project: typeof projectsData[0]; o
 // 项目经历主组件
 export default function Projects() {
   const { t } = useLanguage()
-  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null)
+  const [selectedProject, setSelectedProject] = useState<(typeof projectsData)[0] | null>(null)
 
   return (
     <section id="projects" className="py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          title={t('projects.title') as string}
-          subtitle=""
-        />
+        <SectionTitle title={t('projects.title')} subtitle="" />
 
         <div className="grid md:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
-            <div key={project.id} onClick={() => setSelectedProject(project)}>
+            <div
+              key={project.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => setSelectedProject(project)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setSelectedProject(project)
+                }
+              }}
+            >
               <ProjectCard project={project} index={index} />
             </div>
           ))}
@@ -294,10 +335,7 @@ export default function Projects() {
       {/* Modal */}
       <AnimatePresence>
         {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
+          <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
         )}
       </AnimatePresence>
     </section>

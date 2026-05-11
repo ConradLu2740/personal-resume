@@ -1,9 +1,8 @@
 'use client'
-
-import React from 'react'
-import { Briefcase, Calendar, MapPin } from 'lucide-react'
-import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
+import { useLanguage } from '@/components/language-provider'
+import { motion } from 'framer-motion'
+import { Briefcase, Calendar, MapPin } from 'lucide-react'
 
 // 实习经历数据配置
 const experienceData = [
@@ -17,8 +16,10 @@ const experienceData = [
     locationEn: 'Hangzhou',
     startDate: '2026-04',
     endDate: '至今',
-    description: '独立设计并落地一套端到端智能体「基于大模型的视频高光片段自动检测 Agent」，通过大模型理解视频内容，自动识别精彩片段并输出结构化结果，解决人工筛选效率低的问题。',
-    descriptionEn: 'Independently designed and deployed an end-to-end intelligent agent "Video Highlight Auto-Detection Agent based on Large Models", using LLMs to understand video content, automatically identify highlight clips, and output structured results, solving the inefficiency of manual screening.',
+    description:
+      '独立设计并落地一套端到端智能体「基于大模型的视频高光片段自动检测 Agent」，通过大模型理解视频内容，自动识别精彩片段并输出结构化结果，解决人工筛选效率低的问题。',
+    descriptionEn:
+      'Independently designed and deployed an end-to-end intelligent agent "Video Highlight Auto-Detection Agent based on Large Models", using LLMs to understand video content, automatically identify highlight clips, and output structured results, solving the inefficiency of manual screening.',
     achievements: [
       'Agent 流水线设计：构建「场景分割 → 关键帧提取 → 大模型视觉评分 → 语音转写 → 语义去重合并 → 片段裁剪导出」全自动链路，实现从视频上传到 JSON 输出的无人值守闭环',
       '大模型应用与 Prompt 工程：集成通义千问VL API，设计 8 维度评分 Prompt（视觉冲击、情绪强度、表情等），将人类对「名场面」的主观判断显式化，引导模型输出可解释的评分',
@@ -35,20 +36,23 @@ const experienceData = [
 ]
 
 // 实习经历卡片组件
-function ExperienceCard({ 
-  experience, 
-  index 
-}: { 
-  experience: typeof experienceData[0]; 
-  index: number 
+function ExperienceCard({
+  experience,
+  index,
+}: {
+  experience: (typeof experienceData)[0]
+  index: number
 }) {
   const { language, t } = useLanguage()
 
   return (
-    <div className="animate-in-up">
-      <div
-        className="p-5 sm:p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all hover:scale-[1.02]"
-      >
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+    >
+      <div className="p-5 sm:p-8 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all hover:scale-[1.02]">
         {/* Header */}
         <div className="flex items-center gap-2 mb-2">
           <Briefcase className="w-5 h-5 text-primary-400" />
@@ -78,12 +82,14 @@ function ExperienceCard({
 
         {/* Achievements */}
         <ul className="space-y-2 mb-4">
-          {(language === 'zh' ? experience.achievements : experience.achievementsEn).map((achievement, i) => (
-            <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-              <span className="text-primary-400 mt-1">•</span>
-              {achievement}
-            </li>
-          ))}
+          {(language === 'zh' ? experience.achievements : experience.achievementsEn).map(
+            (achievement, i) => (
+              <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
+                <span className="text-primary-400 mt-1">•</span>
+                {achievement}
+              </li>
+            )
+          )}
         </ul>
 
         {/* Internship Summary */}
@@ -95,7 +101,7 @@ function ExperienceCard({
           </p>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -106,18 +112,11 @@ export default function Experience() {
   return (
     <section id="experience" className="py-16 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          title={t('experience.title') as string}
-          subtitle=""
-        />
+        <SectionTitle title={t('experience.title')} subtitle="" />
 
         <div className="max-w-3xl mx-auto space-y-8">
           {experienceData.map((experience, index) => (
-            <ExperienceCard
-              key={experience.id}
-              experience={experience}
-              index={index}
-            />
+            <ExperienceCard key={experience.id} experience={experience} index={index} />
           ))}
         </div>
       </div>

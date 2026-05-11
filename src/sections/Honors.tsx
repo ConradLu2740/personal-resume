@@ -1,10 +1,8 @@
 'use client'
-
-import React from 'react'
+import SectionTitle from '@/components/SectionTitle'
+import { useLanguage } from '@/components/language-provider'
 import { motion } from 'framer-motion'
 import { Award, Heart } from 'lucide-react'
-import { useLanguage } from '@/components/language-provider'
-import SectionTitle from '@/components/SectionTitle'
 
 // 荣誉数据配置
 const honorsData = [
@@ -12,7 +10,8 @@ const honorsData = [
     id: 1,
     icon: Award,
     title: '东北大学计算机科学与工程学院优秀学生奖学金',
-    titleEn: 'Outstanding Student Scholarship, School of Computer Science and Engineering, Northeastern University',
+    titleEn:
+      'Outstanding Student Scholarship, School of Computer Science and Engineering, Northeastern University',
     period: '2020 - 2024',
   },
   {
@@ -25,7 +24,7 @@ const honorsData = [
 ]
 
 // 荣誉卡片组件
-function HonorCard({ honor, index }: { honor: typeof honorsData[0]; index: number }) {
+function HonorCard({ honor, index }: { honor: (typeof honorsData)[0]; index: number }) {
   const { language } = useLanguage()
   const Icon = honor.icon
 
@@ -57,10 +56,7 @@ export default function Honors() {
   return (
     <section id="honors" className="py-16 md:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          title={t('honors.title') as string}
-          subtitle=""
-        />
+        <SectionTitle title={t('honors.title')} subtitle="" />
 
         <div className="max-w-3xl mx-auto space-y-4">
           {honorsData.map((honor, index) => (

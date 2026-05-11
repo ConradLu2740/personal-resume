@@ -1,6 +1,7 @@
 'use client'
 
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import type React from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 
 // 定义支持的语言类型
 type Language = 'zh' | 'en'
@@ -31,7 +32,8 @@ const zhTranslations = {
   },
   about: {
     title: '关于我',
-    description: '东北大学电子信息工程本科，24岁，可立即到岗。英语雅思7.0（阅读9.0），无障碍阅读英文技术文档与论文。专注于 LLM 应用开发与 Agent 系统构建。在当虹科技实习期间独立设计并落地视频高光片段自动检测 Agent，将单视频分析耗时从 2 小时压缩至 5 分钟；本科毕设提出 SteganoGAN-Transformer 模型，PSNR 达 41.675dB。善于将大模型能力与工程实践结合，持续追求简洁高效的工程方案。',
+    description:
+      '东北大学电子信息工程本科，24岁，可立即到岗。英语雅思7.0（阅读9.0），无障碍阅读英文技术文档与论文。专注于 LLM 应用开发与 Agent 系统构建。在当虹科技实习期间独立设计并落地视频高光片段自动检测 Agent，将单视频分析耗时从 2 小时压缩至 5 分钟；本科毕设提出 SteganoGAN-Transformer 模型，PSNR 达 41.675dB。善于将大模型能力与工程实践结合，持续追求简洁高效的工程方案。',
     education: '教育背景',
     university: '东北大学',
     major: '电子信息工程',
@@ -107,7 +109,8 @@ const enTranslations = {
   },
   about: {
     title: 'About Me',
-    description: 'B.S. in Electronic Information Engineering from Northeastern University, 24 years old, available immediately. IELTS 7.0 (Reading 9.0), proficient in reading English technical documentation and papers. Focused on LLM application development and Agent system building. During internship at ArcVideo, independently designed and deployed a video highlight detection Agent, compressing single-video analysis from 2 hours to 5 minutes. Bachelor thesis: SteganoGAN-Transformer model achieving PSNR 41.675dB. Skilled at combining large model capabilities with engineering practices.',
+    description:
+      'B.S. in Electronic Information Engineering from Northeastern University, 24 years old, available immediately. IELTS 7.0 (Reading 9.0), proficient in reading English technical documentation and papers. Focused on LLM application development and Agent system building. During internship at ArcVideo, independently designed and deployed a video highlight detection Agent, compressing single-video analysis from 2 hours to 5 minutes. Bachelor thesis: SteganoGAN-Transformer model achieving PSNR 41.675dB. Skilled at combining large model capabilities with engineering practices.',
     education: 'Education',
     university: 'Northeastern University',
     major: 'Electronic Information Engineering',
@@ -143,7 +146,8 @@ const enTranslations = {
   },
   contact: {
     title: 'Contact',
-    description: "Looking for LLM Application Development / AI Agent Engineering internship or full-time opportunities. Excited to connect with you!",
+    description:
+      'Looking for LLM Application Development / AI Agent Engineering internship or full-time opportunities. Excited to connect with you!',
     email: 'Email',
     phone: 'Phone',
     location: 'Location',
@@ -172,7 +176,8 @@ const translations: Record<Language, Translations> = {
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: (key: string) => string | string[] | Translations
+  t: (key: string) => string
+  tArr: (key: string) => string[]
 }
 
 // 创建语言上下文
@@ -180,6 +185,7 @@ const LanguageContext = createContext<LanguageContextType>({
   language: 'zh',
   setLanguage: () => {},
   t: (key: string) => key,
+  tArr: (key: string) => [key],
 })
 
 // 获取嵌套对象的值
@@ -200,30 +206,57 @@ function getNestedValue(obj: Translations, key: string): string | string[] | Tra
 
 // 语言提供者组件
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('zh')
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('portfolio-language')
+      if (saved === 'en' || saved === 'zh') return saved
+    }
+    return 'zh'
+  })
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('portfolio-language', lang)
+    }
     if (typeof document !== 'undefined') {
       document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en'
     }
   }, [])
 
-  const t = useCallback(
+  const resolve = useCallback(
     (key: string): string | string[] | Translations => {
       const value = getNestedValue(translations[language], key)
+      if (value === undefined) {
+        console.warn(`Translation key not found: ${key}`)
+        return key
+      }
       return value
     },
     [language]
   )
 
+  const t = useCallback(
+    (key: string): string => {
+      const value = resolve(key)
+      if (Array.isArray(value)) return value.join(', ')
+      if (typeof value === 'object') return key
+      return value
+    },
+    [resolve]
+  )
+
+  const tArr = useCallback(
+    (key: string): string[] => {
+      const value = resolve(key)
+      if (Array.isArray(value)) return value
+      return [String(value)]
+    },
+    [resolve]
+  )
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, tArr }}>
       {children}
     </LanguageContext.Provider>
   )

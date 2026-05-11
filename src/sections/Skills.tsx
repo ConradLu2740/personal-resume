@@ -1,14 +1,8 @@
 'use client'
-
-import React from 'react'
-import {
-  Brain,
-  Server,
-  Code2,
-  Wrench,
-} from 'lucide-react'
-import { useLanguage } from '@/components/language-provider'
 import SectionTitle from '@/components/SectionTitle'
+import { useLanguage } from '@/components/language-provider'
+import { motion } from 'framer-motion'
+import { Brain, Code2, Server, Wrench } from 'lucide-react'
 
 type SkillLevel = 'expert' | 'proficient' | 'familiar'
 
@@ -30,7 +24,11 @@ const skillsData: SkillCategory[] = [
     label: 'ai',
     skills: [
       { name: 'Prompt Engineering', nameEn: 'Prompt Engineering', level: 'expert' },
-      { name: 'Function Calling / Tool Use', nameEn: 'Function Calling / Tool Use', level: 'expert' },
+      {
+        name: 'Function Calling / Tool Use',
+        nameEn: 'Function Calling / Tool Use',
+        level: 'expert',
+      },
       { name: 'LangChain', nameEn: 'LangChain', level: 'proficient' },
       { name: 'Qwen-VL 多模态', nameEn: 'Qwen-VL Multi-modal', level: 'proficient' },
       { name: 'RAG 检索增强生成', nameEn: 'RAG', level: 'proficient' },
@@ -44,7 +42,11 @@ const skillsData: SkillCategory[] = [
     skills: [
       { name: 'Python', nameEn: 'Python', level: 'expert' },
       { name: 'OpenCV / FFmpeg', nameEn: 'OpenCV / FFmpeg', level: 'proficient' },
-      { name: 'PySceneDetect / Faster-Whisper', nameEn: 'PySceneDetect / Faster-Whisper', level: 'proficient' },
+      {
+        name: 'PySceneDetect / Faster-Whisper',
+        nameEn: 'PySceneDetect / Faster-Whisper',
+        level: 'proficient',
+      },
       { name: 'FastAPI / RESTful API', nameEn: 'FastAPI / RESTful API', level: 'proficient' },
       { name: 'C/C++', nameEn: 'C/C++', level: 'familiar' },
       { name: 'Go', nameEn: 'Go', level: 'familiar' },
@@ -75,7 +77,10 @@ const skillsData: SkillCategory[] = [
 
 const levelOrder: SkillLevel[] = ['expert', 'proficient', 'familiar']
 
-const levelConfig: Record<SkillLevel, { label: string; labelEn: string; tagClass: string; rowLabelClass: string }> = {
+const levelConfig: Record<
+  SkillLevel,
+  { label: string; labelEn: string; tagClass: string; rowLabelClass: string }
+> = {
   expert: {
     label: '精通',
     labelEn: 'Expert',
@@ -96,7 +101,12 @@ const levelConfig: Record<SkillLevel, { label: string; labelEn: string; tagClass
   },
 }
 
-function SkillTag({ name, nameEn, tagClass, index }: { name: string; nameEn: string; tagClass: string; index: number }) {
+function SkillTag({
+  name,
+  nameEn,
+  tagClass,
+  index,
+}: { name: string; nameEn: string; tagClass: string; index: number }) {
   const { language } = useLanguage()
 
   return (
@@ -110,27 +120,29 @@ function SkillTag({ name, nameEn, tagClass, index }: { name: string; nameEn: str
 }
 
 function SkillCard({ category, index }: { category: SkillCategory; index: number }) {
-  const { language } = useLanguage()
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const Icon = category.icon
 
-  const grouped = levelOrder.map((level) => ({
-    level,
-    skills: category.skills.filter((s) => s.level === level),
-  })).filter((g) => g.skills.length > 0)
+  const grouped = levelOrder
+    .map((level) => ({
+      level,
+      skills: category.skills.filter((s) => s.level === level),
+    }))
+    .filter((g) => g.skills.length > 0)
 
   return (
-    <div
-      className={`p-5 sm:p-6 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all animate-in-up`}
-      style={{ animationDelay: `${index * 0.15}s` }}
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ delay: index * 0.15, duration: 0.6, ease: 'easeOut' }}
+      className="p-5 sm:p-6 rounded-xl bg-secondary/50 border border-border hover:border-primary-500/50 transition-all"
     >
       <div className="flex items-center gap-3 mb-5">
         <div className="p-3 rounded-lg bg-primary-500/20">
           <Icon className="w-6 h-6 text-primary-400" />
         </div>
-        <h3 className="text-xl font-semibold">
-          {t(`skills.${category.label}`) as string}
-        </h3>
+        <h3 className="text-xl font-semibold">{t(`skills.${category.label}`)}</h3>
       </div>
 
       <div className="space-y-3">
@@ -156,7 +168,7 @@ function SkillCard({ category, index }: { category: SkillCategory; index: number
           )
         })}
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -166,10 +178,7 @@ export default function Skills() {
   return (
     <section id="skills" className="py-16 md:py-32 bg-secondary/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <SectionTitle
-          title={t('skills.title') as string}
-          subtitle=""
-        />
+        <SectionTitle title={t('skills.title')} subtitle="" />
 
         <div className="grid md:grid-cols-2 gap-8">
           {skillsData.map((category, index) => (

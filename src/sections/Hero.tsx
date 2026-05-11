@@ -1,27 +1,18 @@
 'use client'
-
-import React from 'react'
+import { useLanguage } from '@/components/language-provider'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 import { motion } from 'framer-motion'
 import { ArrowDown, Download, Mail } from 'lucide-react'
-import { useLanguage } from '@/components/language-provider'
 
 // 首页 Hero 区域组件 - 包含个人介绍、CTA 按钮和滚动提示
 export default function Hero() {
   const { t } = useLanguage()
+  const prefersReducedMotion = useReducedMotion()
 
-  // 滚动到项目区域
-  const scrollToProjects = () => {
-    const element = document.querySelector('#projects')
+  const scrollToSection = (selector: string) => {
+    const element = document.querySelector(selector)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-  // 滚动到联系区域
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact')
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+      element.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' })
     }
   }
 
@@ -32,58 +23,74 @@ export default function Hero() {
     >
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary-500/10" />
-      
+
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          animate={
+            prefersReducedMotion
+              ? {}
+              : {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }
+          }
+          transition={
+            prefersReducedMotion
+              ? { duration: 0 }
+              : {
+                  duration: 8,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: 'easeInOut',
+                }
+          }
         />
         <motion.div
           className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-600/20 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.5, 0.3, 0.5],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
+          animate={
+            prefersReducedMotion
+              ? {}
+              : {
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.5, 0.3, 0.5],
+                }
+          }
+          transition={
+            prefersReducedMotion
+              ? { duration: 0 }
+              : {
+                  duration: 8,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: 'easeInOut',
+                }
+          }
         />
       </div>
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.8 }}
         >
           {/* Greeting */}
           <motion.p
             className="text-xl md:text-2xl text-muted-foreground mb-4"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.2 }}
           >
-            {t('hero.greeting') as string}
+            {t('hero.greeting')}
           </motion.p>
 
           {/* Name */}
           <motion.h1
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6"
-            initial={{ opacity: 0, y: 20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.3, duration: 0.8 }}
           >
             <span className="bg-gradient-to-r from-primary-400 via-primary-500 to-primary-600 bg-clip-text text-transparent">
               卢锡远
@@ -93,52 +100,52 @@ export default function Hero() {
           {/* Title */}
           <motion.h2
             className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold mb-3 text-foreground"
-            initial={{ opacity: 0, y: 20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.5, duration: 0.8 }}
           >
-            {t('hero.title') as string}
+            {t('hero.title')}
           </motion.h2>
 
           {/* Meta Info */}
           <motion.p
             className="text-sm sm:text-base text-primary-400/80 mb-4"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.6 }}
           >
-            {t('hero.metaInfo') as string}
+            {t('hero.metaInfo')}
           </motion.p>
 
           {/* Subtitle */}
           <motion.p
             className="text-lg sm:text-xl md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 px-4 sm:px-0"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.7 }}
           >
-            {t('hero.subtitle') as string}
+            {t('hero.subtitle')}
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            initial={{ opacity: 0, y: 20 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.9 }}
           >
             <button
-              onClick={scrollToProjects}
+              onClick={() => scrollToSection('#projects')}
               className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-full font-medium transition-all hover:scale-105 flex items-center gap-2"
             >
-              {t('hero.viewProjects') as string}
+              {t('hero.viewProjects')}
               <ArrowDown className="w-4 h-4" />
             </button>
             <button
-              onClick={scrollToContact}
+              onClick={() => scrollToSection('#contact')}
               className="px-8 py-4 border-2 border-primary-500 text-primary-400 hover:bg-primary-500/10 rounded-full font-medium transition-all hover:scale-105 flex items-center gap-2"
             >
-              {t('hero.contactMe') as string}
+              {t('hero.contactMe')}
               <Mail className="w-4 h-4" />
             </button>
           </motion.div>
@@ -146,9 +153,9 @@ export default function Hero() {
           {/* Download Resume */}
           <motion.div
             className="mt-6"
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.1 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 1.1 }}
           >
             <a
               href="/resume.pdf"
@@ -165,8 +172,10 @@ export default function Hero() {
       {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        animate={prefersReducedMotion ? {} : { y: [0, 10, 0] }}
+        transition={
+          prefersReducedMotion ? { duration: 0 } : { duration: 2, repeat: Number.POSITIVE_INFINITY }
+        }
       >
         <ArrowDown className="w-6 h-6 text-muted-foreground" />
       </motion.div>

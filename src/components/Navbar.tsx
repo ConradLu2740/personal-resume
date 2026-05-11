@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { Sun, Moon, Menu, X, Globe } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Globe, Menu, Moon, Sun, X } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
+import Logo from './Logo'
 import { useLanguage } from './language-provider'
 
 // 导航栏组件 - 支持暗黑模式切换、多语言切换和响应式菜单
@@ -24,13 +25,13 @@ export default function Navbar() {
 
   // 导航链接配置
   const navLinks = [
-    { href: '#home', label: t('nav.home') as string },
-    { href: '#about', label: t('nav.about') as string },
-    { href: '#skills', label: t('nav.skills') as string },
-    { href: '#projects', label: t('nav.projects') as string },
-    { href: '#experience', label: t('nav.experience') as string },
-    { href: '#honors', label: t('nav.honors') as string },
-    { href: '#contact', label: t('nav.contact') as string },
+    { href: '#home', label: t('nav.home') },
+    { href: '#about', label: t('nav.about') },
+    { href: '#skills', label: t('nav.skills') },
+    { href: '#projects', label: t('nav.projects') },
+    { href: '#experience', label: t('nav.experience') },
+    { href: '#honors', label: t('nav.honors') },
+    { href: '#contact', label: t('nav.contact') },
   ]
 
   // 平滑滚动到指定区域
@@ -48,22 +49,14 @@ export default function Navbar() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+        isScrolled ? 'bg-background/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div
-            className="flex-shrink-0 cursor-pointer"
-            whileHover={{ scale: 1.05 }}
-            onClick={() => scrollToSection('#home')}
-          >
-            <span className="text-xl font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-              Portfolio
-            </span>
+          <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }}>
+            <Logo />
           </motion.div>
 
           {/* Desktop Navigation */}

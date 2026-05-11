@@ -1,6 +1,4 @@
 'use client'
-
-import React from 'react'
 import { motion } from 'framer-motion'
 
 // 区块标题组件 - 带有动画效果的标题和副标题
@@ -24,12 +22,10 @@ export default function SectionTitle({ title, subtitle, centered = true }: Secti
           {title}
         </span>
       </h2>
-      {subtitle && (
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-          {subtitle}
-        </p>
-      )}
-      <div className={`mt-4 h-1 w-20 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full ${centered ? 'mx-auto' : ''}`} />
+      {subtitle && <p className="text-lg text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>}
+      <div
+        className={`mt-4 h-1 w-20 bg-gradient-to-r from-primary-400 to-primary-600 rounded-full ${centered ? 'mx-auto' : ''}`}
+      />
     </motion.div>
   )
 }
